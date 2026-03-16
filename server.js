@@ -72,3 +72,33 @@ app.get('*', (req, res) => {
     process.exit(1);
   }
 })();
+import express from "express";
+import pkg from "pg";
+import path from "path";
+import { fileURLToPath } from "url";
+
+const { Pool } = pkg;
+
+const app = express();
+
+app.use(express.json());
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(__dirname));
+
+const pool = new Pool({
+ connectionString: process.env.DATABASE_URL,
+ ssl: { rejectUnauthorized:false }
+});
+
+app.get("/", (req,res)=>{
+ res.sendFile(path.join(__dirname,"index.html"));
+});
+
+const PORT = process.env.PORT || 10000;
+
+app.listen(PORT,()=>{
+ console.log("Server running on",PORT);
+});
