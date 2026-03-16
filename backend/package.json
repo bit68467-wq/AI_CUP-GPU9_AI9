@@ -11,3 +11,9 @@
   "pg": "^8.11.3"
  }
 }
+
+{
+ "scripts": {
+  "start": "node backend/server.js"
+ }
+}
