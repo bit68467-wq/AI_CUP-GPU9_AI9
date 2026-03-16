@@ -1,0 +1,2 @@
+# AI_CUP-GPU9_AI9
+GPU 
